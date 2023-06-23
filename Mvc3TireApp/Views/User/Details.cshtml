@@ -1,0 +1,54 @@
+﻿@model IEnumerable<BAL.Users>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table border="1">
+    <tr>
+        @*<th width="10%" style="text-align:left">
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>*@
+        <th width="25%">
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th width="30%">
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th width="20%">
+            @Html.DisplayNameFor(model => model.MailId)
+        </th>
+        <th width="15%"> Action</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        using (Html.BeginForm("Delete", "User", new { UserName = item.UserName }))
+        {
+            <tr>
+                @*<td width="10%" style="text-align:left">
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>*@
+                <td width="25%" style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td width="30%" style="text-align: center">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td width="20%" style="text-align: center">
+                    @Html.DisplayFor(modelItem => item.MailId)
+                </td>
+                <td width="15%" style="text-align: center">
+                    @Html.ActionLink("Edit", "Edit", new { UserName = item.UserName }) |
+                    <input type="submit" value="Delete" onclick="return confirm('Are You Sure you want to delete User with Name @item.Name ?');" />
+                </td>
+            </tr>
+        }
+    }
+
+</table>
